@@ -1,0 +1,108 @@
+@import "variables";
+
+.blink {
+  opacity: 0.35;
+  animation: blink 1.5s $ease infinite alternate;
+
+  &:hover {
+    animation: none;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeSlideUpIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 125%, 0);
+  }
+  to {
+    opacity: 100%;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes fadeSlideUpOut {
+  from {
+    opacity: 100%;
+    transform: translateZ(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -125%, 0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mo-animate-content {
+  $i: 1;
+  $supportedLength: 16;
+  @while $i < $supportedLength {
+    & > *:nth-child(#{ $i }) > * {
+      animation-delay: #{ $i / ($supportedLength / 4) + s } !important;
+    }
+    $i: $i + 1;
+  }
+
+  & > * > * {
+    animation-fill-mode: forwards;
+    animation-timing-function: $ease;
+    animation-duration: $normal-transition;
+  }
+
+  &.mo-animate-fadeSlideUpOut > * {
+    overflow: hidden;
+    display: flex;
+
+    & > * {
+      animation-name: fadeSlideUpOut;
+    }
+  }
+
+  &.mo-animate-fadeSlideUpIn > * {
+    overflow: hidden;
+    display: flex;
+
+    & > * {
+      animation-name: fadeSlideUpIn;
+    }
+  }
+
+  &.mo-animate-xslow > * > * {
+    animation-duration: $xslow-transition;
+  }
+
+  &.mo-animate-slow > * > * {
+    animation-duration: $slow-transition;
+  }
+
+  &.mo-animate-fast > * > * {
+    animation-duration: $fast-transition;
+  }
+}

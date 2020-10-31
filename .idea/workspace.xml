@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a6f26b00-fbad-4cc3-938e-0da17264bc7f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="SCSS File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jENDJfa49QsyBUBPvFTqfX57P0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6f26b00-fbad-4cc3-938e-0da17264bc7f" name="Default Changelist" comment="" />
+      <created>1603365169589</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603365169589</updated>
+      <workItem from="1603365170809" duration="16512000" />
+      <workItem from="1603447932798" duration="10603000" />
+      <workItem from="1603535596182" duration="19354000" />
+      <workItem from="1603620876682" duration="7864000" />
+      <workItem from="1603658879335" duration="4790000" />
+      <workItem from="1603708798966" duration="10460000" />
+      <workItem from="1603749767837" duration="31000" />
+      <workItem from="1603750802827" duration="242000" />
+      <workItem from="1603751259165" duration="4532000" />
+      <workItem from="1603816240736" duration="647000" />
+      <workItem from="1603817571033" duration="3372000" />
+      <workItem from="1603905012478" duration="1911000" />
+      <workItem from="1604156039302" duration="9663000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="494" y="317" key="EditFileWatcherDialog" timestamp="1603365460860">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="494" y="317" key="EditFileWatcherDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603365460860" />
+    <state x="428" y="272" key="IDE.errors.dialog" timestamp="1603816292910">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="428" y="272" key="IDE.errors.dialog/0.0.1680.1050/-37.-768.1360.768@0.0.1680.1050" timestamp="1603816292910" />
+    <state x="246" y="-728" key="SettingsEditor" timestamp="1604165690038">
+      <screen x="-37" y="-768" width="1360" height="768" />
+    </state>
+    <state x="246" y="-728" key="SettingsEditor/0.0.1680.1050/-37.-768.1360.768@-37.-768.1360.768" timestamp="1604165690038" />
+    <state x="349" y="161" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1603817627376" />
+    <state x="358" y="-763" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604163410292">
+      <screen x="-37" y="-768" width="1360" height="768" />
+    </state>
+    <state x="358" y="-763" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1680.1050/-37.-768.1360.768@-37.-768.1360.768" timestamp="1604163410292" />
+    <state x="488" y="143" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1603664299372" />
+    <state x="402" y="-562" width="572" height="486" key="find.popup" timestamp="1604158068242">
+      <screen x="-37" y="-768" width="1360" height="768" />
+    </state>
+    <state x="402" y="-562" width="572" height="486" key="find.popup/0.0.1680.1050/-37.-768.1360.768@-37.-768.1360.768" timestamp="1604158068242" />
+    <state x="542" y="282" width="595" height="544" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1603817903609" />
+    <state width="600" height="440" key="javadoc.popup" timestamp="1603485637109">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="600" height="440" key="javadoc.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1603485637109" />
+    <state x="372" y="-598" width="670" height="495" key="search.everywhere.popup" timestamp="1604159781145">
+      <screen x="-37" y="-768" width="1360" height="768" />
+    </state>
+    <state x="372" y="-598" width="670" height="495" key="search.everywhere.popup/0.0.1680.1050/-37.-768.1360.768@-37.-768.1360.768" timestamp="1604159781145" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1603820079435" />
+  </component>
+</project>

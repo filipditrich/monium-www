@@ -1,0 +1,65 @@
+$dev: false;
+
+/********************
+ Colors
+ ********************/
+$black: #000000;
+$white: #FFFFFF;
+
+//$primary: #12CEDF;
+$primary: $white;
+$text: $white;
+$background: $black;
+
+/********************
+ Sizing
+ ********************/
+$nav-width: 50px;
+$nav-offset-x: 30px;
+$nav-offset-y: 30px;
+$icon-size: 24px;
+
+$section-offset: $nav-offset-x;
+$content-width: calc(100% - #{ (2 * ($nav-width + $nav-offset-x) + (2 * $section-offset)) });
+$content-height: calc(100% - #{ (2 * $nav-offset-y) });
+
+/********************
+ Transitions
+ ********************/
+$load-transition: 2500ms;
+$xslow-transition: 1200ms;
+$slow-transition: 600ms;
+$normal-transition: 250ms;
+$fast-transition: 150ms;
+
+/********************
+ Easing
+ ********************/
+$ease: cubic-bezier(0.86, 0, 0.07, 1);
+
+/********************
+ Font Sizing
+ ********************/
+$font-size-xsm: 70%;
+$font-size-sm: 80%;
+$font-size-md: 90%;
+$font-size-lg: 110%;
+$font-size-xlg: 150%;
+$font-size-mega: 225%;
+
+/********************
+ Breakpoints
+ ********************/
+$bp-xs: 0;
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+$min-supported-width: 320px;
+
+// ============ export ============
+:root {
+  --primary: #{ $primary };
+  --text: #{ $text };
+  --bg: #{ $background };
+}

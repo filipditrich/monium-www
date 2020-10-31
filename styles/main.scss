@@ -1,0 +1,959 @@
+// variables
+@import "./scss/variables";
+
+// mixins
+@import "./scss/mixins/fonts";
+@import "./scss/mixins/colors";
+@import "./scss/mixins/transitions";
+
+* {
+  @if $dev {
+    outline: 1px solid orangered;
+  } @else {
+    outline: none;
+  }
+}
+
+/********************
+ Base
+ ********************/
+html, body {
+  background: $background;
+  color: $text;
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
+  overflow: hidden;
+  @include pragatiNarrow;
+  cursor: url("../images/cursor.png"), auto;
+}
+
+/* -- misc -- */
+.simplebar-content > .mo-menu-trigger {
+  //mix-blend-mode: difference; // FIXME: THIS SHIT CAUSES LAGGING
+}
+
+/* -- icons -- */
+.mo-default-icon > * {
+  fill: none;
+  stroke: $white;
+  stroke-linecap: square;
+  stroke-miterlimit: 10;
+  stroke-width: 48px;
+}
+
+/* -- lists -- */
+ul.reset,
+ul.reset li,
+ul.reset ul li {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+ul.mo-vertical-list {
+  display: flex;
+  margin-top: 1rem;
+
+  li {
+    margin: 0 1rem;
+    display: flex;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
+/* -- links -- */
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: inherit;
+}
+a.mo-link {
+  // TODO: hyper-link styling
+  @include transition($slow-transition, color);
+
+  &:hover {
+    color: $text;
+  }
+}
+
+/* -- text -- */
+.mo-text {
+  @include poppins;
+  line-height: 2;
+}
+
+/********************
+ Page Wrapper
+ ********************/
+#mo-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+/********************
+ Page Loading
+ ********************/
+#mo-preloader {
+  position: fixed;
+  background: $black;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  opacity: 0;
+  @include transition($xslow-transition, opacity, transform);
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    fill: rgba($white, 0.75);
+  }
+
+  $loaderSize: 80px;
+
+  .loader-percentage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: $text;
+    font-size: $font-size-md;
+  }
+
+  .loader-circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $loaderSize;
+    height: $loaderSize;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+  }
+
+  .loader-line-mask {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $loaderSize / 2;
+    height: $loaderSize;
+    margin-left: -$loaderSize / 2;
+    margin-top: -$loaderSize / 2;
+    overflow: hidden;
+    transform-origin: ($loaderSize / 2) ($loaderSize / 2);
+    -webkit-mask-image: -webkit-linear-gradient(top, $black, rgba($black, 0));
+    mask-image: linear-gradient(top, $black, rgba($black, 0));
+    animation: rotate $load-transition infinite linear;
+
+    .loader-line {
+      width: $loaderSize;
+      height: $loaderSize;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+/********************
+ Menu
+ ********************/
+.mo-menu-trigger {
+  width: $nav-width;
+  height: $nav-width;
+  padding: 4px;
+  box-sizing: border-box;
+  position: fixed;
+  top: $nav-offset-y;
+  right: $nav-offset-x;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  //cursor: pointer;
+  @include transition($load-transition, top, right);
+  z-index: 9998;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: $nav-width - 8px;
+    background: $white;
+    left: 50%;
+    transform: translate(-50%, 0);
+    @include transition($normal-transition, transform, top, width);
+  }
+
+  &::before {
+    top: 10%;
+  }
+
+  &::after {
+    top: 30%;
+  }
+
+  & > span {
+    text-transform: uppercase;
+    font-size: $font-size-xsm;
+  }
+
+  &:hover {
+    &::before {
+      transform: translate(-50%, 2px);
+    }
+
+    &::after {
+      transform: translate(-50%, -2px);
+    }
+  }
+}
+
+#mo-menu-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba($black, 0.975);
+  transition: transform 0s $ease ($xslow-transition + 1000ms), opacity $xslow-transition $ease 1000ms;
+  z-index: 1000;
+  display: flex;
+  padding: $nav-offset-x $nav-offset-y;
+  box-sizing: border-box;
+  transform: scale(0);
+  opacity: 0;
+  box-shadow: 0 0 100vw 100vw $black;
+
+  .mo-menu-trigger {
+    position: absolute;
+    opacity: 0.35;
+    @include transition($slow-transition, opacity);
+
+    &::before, &::after {
+      top: 50%;
+      width: ($nav-width - 8px) / 2;
+    }
+
+    &::before {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, 0) rotate(-45deg);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .mo-menu-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    .mo-menu-header {
+      height: $icon-size * 2;
+
+      & > svg {
+        max-width: 100%;
+        max-height: 100%;
+
+        path {
+          fill: muted-text();
+          @include transition($slow-transition, fill);
+
+          &:hover {
+            fill: $text;
+            transition-duration: $slow-transition;
+          }
+        }
+      }
+    }
+
+    ul.mo-menu-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+
+      $i: 1;
+      @while $i < 12 {
+        & > li:nth-child(#{ $i }) > a {
+          animation-delay: #{ ($i / 8) + s };
+        }
+        $i: $i + 1;
+      }
+
+      & > li {
+        padding: 1rem 0;
+        margin: 1rem 0;
+        display: flex;
+
+        &.viewing {
+          overflow: visible;
+        }
+
+        &.viewing > a {
+          color: $text;
+          margin-left: 0;
+          letter-spacing: 0.5rem;
+        }
+
+        &:not(.viewing):hover > a {
+          color: muted-text(60);
+        }
+
+        & > a {
+          font-size: $font-size-mega;
+          font-weight: bold;
+          margin: 0 auto;
+          color: muted-text();
+          @include transition($slow-transition, color);
+
+          animation-name: fadeSlideUpOut;
+          animation-fill-mode: forwards;
+          animation-timing-function: $ease;
+          animation-duration: $xslow-transition;
+        }
+      }
+    }
+
+    .mo-menu-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      & > ul {
+        li {
+          a {
+            width: $icon-size * 0.75;
+            height: $icon-size * 0.75;
+
+            svg {
+              max-width: 100%;
+              max-height: 100%;
+              fill: muted-text();
+              @include transition($slow-transition, fill);
+            }
+          }
+
+          &:hover {
+            svg {
+              fill: $text;
+            }
+          }
+        }
+      }
+
+      .mo-footer-disclaimer {
+        display: flex;
+        width: 100%;
+        margin-top: 2rem;
+        flex-direction: column;
+        align-items: center;
+        font-size: $font-size-xsm;
+        @include poppins;
+        color: muted-text(20);
+
+        span {
+          margin-bottom: 0.5rem;
+        }
+
+        a {
+          @include poppins;
+        }
+      }
+    }
+  }
+}
+
+/********************
+ Page Header
+ ********************/
+#mo-page-header {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url("../images/black.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    transform: scale(1);
+    @include transition($load-transition, transform);
+
+    & > video {
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba($black, 0.7);
+      box-shadow: inset 0 0 150px 34px rgba(0, 0, 0, 0.75);
+      @include transition($load-transition, background, box-shadow);
+    }
+  }
+}
+
+/********************
+ Navigation - sidenav
+ ********************/
+.mo-nav {
+  position: fixed;
+  z-index: 999;
+  height: calc(100vh - 2 * #{ $nav-offset-y });
+  width: $nav-width;
+  top: $nav-offset-y;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  &.right {
+    right: $nav-offset-x;
+  }
+
+  &.left {
+    left: $nav-offset-x;
+  }
+
+  .mo-nav-links {
+    position: relative;
+    left: 0;
+    top: 0;
+    @include transition($load-transition, left, top);
+  }
+
+  .mo-nav-social-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    opacity: 0.35;
+    @include transition($slow-transition, opacity);
+    font-size: $font-size-sm;
+
+    &:not(:first-of-type) {
+      margin-top: 2rem;
+    }
+
+    & > svg {
+      width: $icon-size;
+      height: $icon-size;
+
+      fill: white;
+      @include transition($slow-transition, transform);
+    }
+
+    &:not(.super) > span {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-20%) translateY(-50%);
+    }
+
+    & > span {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      white-space: nowrap;
+      padding: 0.25rem 0.5rem;
+      text-align: left;
+      opacity: 1;
+      transform: translateX(12px) translateY(-50%);
+      transform-origin: left center;
+
+      color: $white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      @include transition($slow-transition, transform, opacity);
+      transition-delay: $load-transition * 0.75;
+    }
+
+    &:hover {
+      opacity: 1;
+
+      & > svg {
+        transform: scale(1.2);
+      }
+
+      & > span {
+        transform: scale(1.1) translateX(12px) translateY(-50%);
+        transition-duration: $slow-transition;
+        opacity: 1;
+      }
+    }
+  }
+
+  .mo-nav-logo {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    @include transition($load-transition, left, bottom);
+  }
+
+  .mo-nav-separator {
+    flex-grow: 1;
+  }
+}
+
+/********************
+ Hero Content
+ ********************/
+.mo-header-content {
+  width: $content-width;
+  max-height: $content-height;
+  z-index: 1;
+
+  h1 {
+    font-size: 750%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+
+    & > span {
+      overflow: hidden;
+      display: flex;
+
+      $i: 1;
+      @while $i < 12 {
+        &:nth-child(#{$i}) > span {
+          transition-delay: #{$i / 16 + s};
+        }
+        $i: $i + 1;
+      }
+
+      & > span {
+        opacity: 0;
+        transform: translate3d(0, 125%, 0);
+        @include transition($xslow-transition, opacity, transform);
+      }
+    }
+  }
+}
+
+.mo-header-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: $nav-offset-y;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //cursor: pointer;
+  font-size: $font-size-sm;
+  z-index: 1;
+  opacity: 1;
+  transform: translateX(-50%);
+  @include transition($load-transition, transform, opacity);
+  transition-delay: 1000ms;
+
+  & > span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  & > svg {
+    margin-top: 0.5rem;
+    width: calc(1.25 * #{ $icon-size });
+    height: calc(1.25 * #{ $icon-size });
+    animation: slideOut 2s $ease infinite both;
+  }
+}
+
+/********************
+ TODO: Page Content
+ ********************/
+.mo-page-section {
+  position: relative;
+  min-height: 100vh; // FIXME
+  display: grid;
+  place-items: center;
+  @include transition($xslow-transition, transform, opacity); // TODO: remove this in _bodyState
+
+  &.alt {
+    background: $white;
+    color: $black;
+  }
+
+  .mo-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: $content-width;
+    //height: $content-height;
+
+    padding: $section-offset;
+    box-sizing: border-box;
+
+    .mo-section-header {
+      display: flex;
+      flex-direction: column-reverse;
+
+      .mo-title {
+        font-size: 300%;
+        margin-top: 0;
+        font-weight: 700;
+      }
+
+      .mo-subtitle {
+        font-size: $font-size-sm;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        font-weight: 400;
+
+        &::before {
+          content: "/";
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    & > .mo-section-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: none; // FIXME
+      background: url("../images/displacement.jpg");
+      background-size: cover;
+      transform: scale(1.25);
+      filter: blur(50px); // TODO: maybe consider having already blurred image instead of this css rule
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    & > p {
+      color: muted-text();
+    }
+  }
+
+  &[mo-sliding] {
+    height: auto;
+
+    .mo-section-wrapper {
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+      @include transition($xslow-transition, background);
+    }
+  }
+}
+
+/********************
+ TODO: Project Slider
+ ********************/
+.mo-project-slider {
+  height: 100%;
+  display: flex;
+
+  .mo-project-slide {
+    height: 100%;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    .mo-project-slide-content {
+      height: $content-height;
+      width: $content-width;
+      display: grid;
+      place-items: center;
+
+     .hover-content {
+       position: relative;
+       display: grid;
+       max-width: 80%;
+       max-height: 80%;
+
+       & > .bg {
+         grid-column: 1;
+         grid-row: 1;
+
+         z-index: -1;
+         display: grid;
+         place-items: center;
+         width: 100%;
+         transform: translateZ(-200px);
+
+         & > img, & > video {
+           max-height: 100%;
+           max-width: 100%;
+         }
+
+         &::after, &::before {
+             content: "";
+             position: absolute;
+             width: 100%;
+             height: 100%;
+             left: 0;
+             top: 0;
+         }
+
+         &::after {
+           box-shadow: inset 0 0 300px 150px rgba($black, 0.5);
+         }
+
+         &::before {
+           background: $black;
+           opacity: 0.35;
+         }
+       }
+
+       & > .fg {
+         grid-column: 1;
+         grid-row: 1;
+
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+
+         .mo-project-title {
+           text-align: center;
+           font-size: 300%;
+           margin: 0;
+         }
+
+         .mo-project-type {
+           text-transform: uppercase;
+           font-size: 0.8rem;
+           font-weight: bold;
+           margin-bottom: 0.5rem;
+           position: relative;
+
+           &::before, &::after {
+             content: "";
+             position: absolute;
+             transform: translateY(-50%);
+             top: 50%;
+             height: 1px;
+             width: 2rem;
+             background: $text;
+           }
+
+           &::before {
+             left: -3rem;
+           }
+
+           &::after {
+             right: -3rem;
+           }
+         }
+       }
+     }
+    }
+  }
+}
+
+/********************
+ TODO: cursor
+ ********************/
+#mo-cursor {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba($white, 0.25);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  @include transition($normal-transition, border-color, transform);
+  text-transform: uppercase;
+  font-size: 30%;
+  text-align: center;
+  white-space: nowrap;
+
+  & > span {
+    opacity: 0;
+    @include transition($slow-transition, opacity);
+  }
+
+  &.project-hover {
+    transform: scale(1.5);
+    border-color: muted-text(50);
+    color: $text;
+
+    & > span {
+      opacity: 1;
+    }
+    // TODO: add pulsing animation?
+  }
+}
+
+/********************
+ Page Footer
+ ********************/
+#mo-page-footer {
+  display: grid;
+  place-items: center;
+  min-height: 300px;
+  padding-top: 2rem;
+  @include poppins;
+  font-size: $font-size-sm;
+  position: relative;
+
+  & > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    //background-image: url("../images/abstract.webp");
+    z-index: -1;
+    //background-attachment: fixed;
+    //background-size: cover;
+    //background-position: 50% 50%;
+    background: #1a1a1a;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba($black, 0.7);
+      box-shadow: inset 0 0 150px 34px rgba(0, 0, 0, 0.75);
+    }
+  }
+
+  .mo-footer-wrapper {
+    width: $content-width;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .mo-footer-column {
+      width: calc(90% / 3);
+      margin: 1rem 0;
+      box-sizing: border-box;
+
+      &:last-of-type {
+        width: 100%;
+        border-top: 1px solid muted-text(10);
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        color: muted-text();
+        margin-bottom: 0;
+      }
+
+      &:first-of-type {
+        .mo-footer-logo {
+          height: $icon-size * 2;
+
+          & > svg {
+            max-height: 100%;
+
+            path {
+              fill: $text;
+            }
+          }
+        }
+
+        & > address {
+          margin: 2rem 0;
+          font-style: normal;
+          color: muted-text();
+        }
+
+        & > ul {
+          li {
+            a {
+              width: $icon-size * 0.75;
+              height: $icon-size * 0.75;
+
+              svg {
+                max-width: 100%;
+                max-height: 100%;
+                fill: muted-text();
+                @include transition($slow-transition, fill);
+              }
+            }
+
+            &:hover {
+              svg {
+                fill: $text;
+              }
+            }
+          }
+        }
+      }
+
+      & > ul:not(.mo-vertical-list) {
+        & > li {
+          color: muted-text();
+          margin: 1rem 0;
+
+          &:first-of-type {
+            @include pragatiNarrow;
+            font-weight: bold;
+            color: $text;
+            font-size: $font-size-xlg;
+            margin-top: 0;
+          }
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/********************
+ Scrollbar
+ ********************/
+@import "./scss/scrollbar";
+
+/********************
+ Animations
+ ********************/
+@import "./scss/animations";
+
+/********************
+ Body State
+ ********************/
+@import "./scss/bodyState";

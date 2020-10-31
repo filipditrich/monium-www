@@ -1,0 +1,37 @@
+@import "../variables";
+
+// pass in any number of transitions
+@mixin transition($duration, $transitions...) {
+  -webkit-transition: unfoldedTransitions($duration, $transitions...);
+  transition: unfoldedTransitions($duration, $transitions...);
+}
+@function unfoldedTransitions($duration, $transitions...) {
+  $unfoldedTransitions: ();
+  @each $transition in $transitions {
+    $unfoldedTransitions: append($unfoldedTransitions, unfoldTransition($transition, $duration), comma);
+  }
+  @return $unfoldedTransitions;
+}
+
+@function unfoldTransition ($transition, $duration: $normal-transition) {
+  // Default values
+  $property: all;
+  $duration: $duration;
+  $easing: $ease;
+  $delay: null; // Browser default is 0, which is what we want
+  $defaultProperties: ($property, $duration, $easing, $delay);
+
+  // Grab transition properties if they exist
+  $unfoldedTransition: ();
+  @for $i from 1 through length($defaultProperties) {
+    $p: null;
+    @if $i <= length($transition) {
+      $p: nth($transition, $i)
+    } @else {
+      $p: nth($defaultProperties, $i)
+    }
+    $unfoldedTransition: append($unfoldedTransition, $p);
+  }
+
+  @return $unfoldedTransition;
+}

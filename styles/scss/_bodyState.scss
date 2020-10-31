@@ -1,0 +1,109 @@
+@import "./variables";
+@import "./mixins/transitions";
+
+body.is-animated {
+  .mo-nav-social-link > span {
+    transition-delay: 0s;
+  }
+
+  .mo-header-content h1 > span > span {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+
+  .simplebar-scrollbar .mo-section-tooltip {
+    opacity: 0.35;
+  }
+
+  .simplebar-track.simplebar-vertical {
+    transition-delay: 1000ms;
+    @include transition($slow-transition, transform, right, bottom);
+  }
+}
+
+body.is-loading {
+  #mo-preloader {
+    opacity: 1;
+  }
+
+  .simplebar-content > .mo-menu-trigger {
+    top: -$nav-offset-y;
+    right: -$nav-width;
+  }
+
+  #mo-page-header .bg {
+    transform: scale(1.25);
+
+    &::before {
+      box-shadow: inset 0 0 75px 34px rgba(0, 0, 0, 0.75);
+      background: rgba($black, 0.35);
+    }
+  }
+
+  .mo-nav-logo {
+    bottom: -$nav-width - $nav-offset-y;
+    left: -$nav-width - $nav-offset-x;
+  }
+
+  .mo-nav-links {
+    top: -$nav-width - $nav-offset-y;
+    left: -$nav-width - $nav-offset-x;
+  }
+
+  .mo-nav-social-link > span {
+    opacity: 0;
+    transform: translateX(-20%) translateY(-50%);
+  }
+
+  .mo-header-arrow {
+    opacity: 0;
+    transform: translate3d(-50%, -125%, 0);
+  }
+
+  .simplebar-scrollbar .mo-section-tooltip {
+    opacity: 0;
+  }
+
+  .simplebar-track.simplebar-vertical {
+    right: -$nav-width;
+    bottom: -$nav-width;
+  }
+
+  .mo-header-content h1 > span > span {
+    opacity: 0;
+    transform: translate3d(0, 125%, 0);
+  }
+}
+
+body.is-menuOpen {
+
+  .mo-page-section {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+  #mo-menu-nav {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0s $ease 0s, opacity $xslow-transition $ease $load-transition * 0.5;
+
+    .mo-menu-links {
+      $i: 1;
+      @while $i < 12 {
+        & > li:nth-child(#{ $i }) > a {
+          animation-delay: #{ ($load-transition * 0.75) + (($i / 8) * 1000) };
+        }
+        $i: $i + 1;
+      }
+
+      & > li > a {
+        opacity: 0;
+        animation-name: fadeSlideUpIn;
+      }
+    }
+  }
+
+  #mo-page-header > .bg::before {
+    background: rgba($black, 0.9);
+    box-shadow: inset 0 0 150px 34px rgba(0, 0, 0, 0.75);
+  }
+}
