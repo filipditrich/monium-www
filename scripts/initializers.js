@@ -4,7 +4,7 @@
  * ================================================= */
 
 // ================== imports ====================== //
-import { Power2, Power4, TimelineMax, TweenLite } from "./libs/gsap/src/index";
+import { Power2, Power4, TimelineMax, TweenLite } from "./libs/gsap/src/index.js";
 import {
     AFTER_LOAD_ANIM_DUR,
     CHEVRON_DOWN,
@@ -16,7 +16,7 @@ import {
     scrollTo,
     sectionsBy, SIMPLEBAR,
     $SIMPLEBAR_EL, $CURSOR_CIRCLE, $BODY
-} from "./utils";
+} from "./utils.js";
 
 // ================= functions ===================== //
 /**

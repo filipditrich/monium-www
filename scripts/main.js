@@ -11,8 +11,8 @@
  * ================================================= */
 
 // ================== imports ====================== //
-import { $BODY, $PAGE_PRELOAD, PAGE_SECTIONS, $CURSOR_CIRCLE, LOAD_ANIMATION_DUR, ANIMATION_DURATION } from "./utils";
-import { initCursor, initHero, initNavs, initScrollbar, initSections, initSmoothScrolling } from "./initializers";
+import { $BODY, $PAGE_PRELOAD, PAGE_SECTIONS, $CURSOR_CIRCLE, LOAD_ANIMATION_DUR, ANIMATION_DURATION } from "./utils.js";
+import { initCursor, initHero, initNavs, initScrollbar, initSections, initSmoothScrolling } from "./initializers.js";
 
 // ================= functions ===================== //
 /**

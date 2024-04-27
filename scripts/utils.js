@@ -4,11 +4,11 @@
  * ================================================= */
 
 // ================== imports ====================== //
-import { gsap, Power4 } from "./libs/gsap/src/index";
-import { ScrollToPlugin } from "./libs/gsap/src/ScrollToPlugin";
-import { TextPlugin } from "./libs/gsap/src/TextPlugin";
-import { ScrollTrigger } from "./libs/gsap/src/ScrollTrigger";
-import { TweenLite } from "./libs/gsap/src/index";
+import { gsap, Power4 } from "./libs/gsap/src/index.js";
+import { ScrollToPlugin } from "./libs/gsap/src/ScrollToPlugin.js";
+import { TextPlugin } from "./libs/gsap/src/TextPlugin.js";
+import { ScrollTrigger } from "./libs/gsap/src/ScrollTrigger.js";
+import { TweenLite } from "./libs/gsap/src/index.js";
 
 // =============== initializations ================ //
 gsap.registerPlugin(ScrollToPlugin, TextPlugin, ScrollTrigger);
